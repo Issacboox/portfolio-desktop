@@ -1,8 +1,9 @@
 "use client";
 
-import { ArrowUpRight, ChevronLeft } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, Database, Rocket, Workflow } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
+import { projectDetails } from "@/content/project-details";
 import { projects, type Project } from "@/content/profile";
 
 const filters = ["All", "Live", "In progress", "Building"] as const;
@@ -107,6 +108,55 @@ function Detail({ project: p, index, onBack }: { project: Project; index: number
           </span>
         ))}
       </div>
+      <HowItWorks slug={p.slug} />
     </article>
+  );
+}
+
+function HowItWorks({ slug }: { slug: string }) {
+  const d = projectDetails[slug];
+  if (!d) return null;
+  const sections = [
+    { title: "How it works", items: d.how, icon: Workflow },
+    { title: "Data", items: d.data, icon: Database },
+    { title: "Deploy & CI/CD", items: d.deploy, icon: Rocket },
+  ];
+  return (
+    <div className="space-y-6 pt-2">
+      <figure className="rounded-2xl border border-black/5 bg-zinc-50/80 p-4 dark:border-white/10 dark:bg-white/[0.03]">
+        <figcaption className="mb-3 text-[11px] font-semibold tracking-wider text-zinc-400 uppercase">Architecture</figcaption>
+        <ol className="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center">
+          {d.flow.map((f, i) => (
+            <li key={f.title} className="flex flex-col items-center gap-2 sm:flex-1 sm:flex-row">
+              <div className="w-full rounded-xl border border-black/10 bg-white px-3 py-2.5 text-center shadow-sm dark:border-white/10 dark:bg-zinc-900">
+                <p className="text-[13px] font-semibold">{f.title}</p>
+                {f.body ? <p className="mt-0.5 text-[11px] leading-snug text-zinc-500">{f.body}</p> : null}
+              </div>
+              {i < d.flow.length - 1 ? (
+                <span aria-hidden className="text-zinc-400">
+                  <span className="sm:hidden">↓</span>
+                  <span className="hidden sm:inline">→</span>
+                </span>
+              ) : null}
+            </li>
+          ))}
+        </ol>
+      </figure>
+      {sections.map((sec) => (
+        <section key={sec.title}>
+          <h3 className="flex items-center gap-2 text-base font-semibold">
+            <sec.icon className="size-4 text-orange-500" /> {sec.title}
+          </h3>
+          <ul className="mt-2 space-y-1.5">
+            {sec.items.map((it) => (
+              <li key={it} className="flex gap-2.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                <span className="mt-2 size-1.5 shrink-0 rounded-full bg-orange-500" />
+                {it}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
   );
 }

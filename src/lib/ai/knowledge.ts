@@ -2,6 +2,7 @@ import "server-only";
 import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { posts, type Block } from "@/content/posts";
+import { projectDetails } from "@/content/project-details";
 import { focusAreas, languages, process as workProcess, profile, projects, skillGroups, timeline, workingStyle } from "@/content/profile";
 
 /** One passage the AI can read and cite. */
@@ -84,6 +85,21 @@ function siteChunks(): Chunk[] {
       section: p.title,
       text: `${p.title} [${p.status}]. ${p.summary} Stack: ${p.stack.join(", ")}.${p.url ? ` Live at ${p.url}.` : ""}`,
     });
+    const d = projectDetails[p.slug];
+    if (d) {
+      c.push({
+        id: `project:${p.slug}:how`,
+        source: "Projects",
+        section: `${p.title} — how it works`,
+        text: [`Architecture: ${d.flow.map((f) => f.title).join(" → ")}.`, ...d.how].join("\n"),
+      });
+      c.push({
+        id: `project:${p.slug}:ops`,
+        source: "Projects",
+        section: `${p.title} — data and deployment`,
+        text: `Data: ${d.data.join(" ")}\nDeploy: ${d.deploy.join(" ")}`,
+      });
+    }
   }
   // Blog posts: one passage per section so citations point at the right part.
   for (const post of posts) {

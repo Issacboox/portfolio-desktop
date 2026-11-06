@@ -219,11 +219,19 @@ export const projects: Project[] = [
     slug: "nuros-portfolio",
     title: "NurOS — this portfolio",
     summary:
-      "A desktop-style portfolio with an AI terminal that answers questions about my work, grounded in my own content (RAG with Claude + pgvector).",
-    stack: ["Next.js", "TypeScript", "Supabase", "pgvector", "Claude API", "Three.js", "Blender"],
+      "A desktop-style portfolio that runs in the browser, with an AI terminal that answers questions about my work from my own content and cites its sources (RAG on a free LLM).",
+    stack: ["Next.js 16", "TypeScript", "Tailwind CSS", "RAG", "Groq / Ollama", "Supabase", "Three.js", "Blender", "Vercel", "PWA"],
     status: "Building",
     repo: "https://github.com/Issacboox",
-    image: "/images/projects/nuros.png",
+    image: "/images/projects/nuros.webp",
+  },
+  {
+    slug: "discord-team-bot",
+    title: "Discord team assistant bot",
+    summary:
+      "An all-in-one Discord bot for a development team: answers questions with Claude, looks up Jira and Azure DevOps, posts Jira and Jenkins alerts, sends calendar reminders, runs a time clock, and saves every shared file to Google Drive. A React admin web controls it all live.",
+    stack: ["Node.js", "discord.js", "Claude API", "Express", "React (Vite)", "Google Drive API", "Jira API", "Docker", "Jenkins"],
+    status: "Live",
   },
   {
     slug: "private-llm-platform",
@@ -241,13 +249,14 @@ export const projects: Project[] = [
     stack: ["Next.js", "React"],
     status: "Live",
     url: "https://marudesk.gogomaru.com",
-    image: "/images/projects/maru-desk.png",
+    image: "/images/projects/maru-desk.webp",
   },
   {
     slug: "joybinitour",
     title: "JoybiniTour",
-    summary: "A website for selling trips and travel guides in Thailand.",
-    stack: ["Next.js", "React"],
+    summary:
+      "Tour booking website, back office and API for curated tours in Phuket and Bangkok: live availability, card and PromptPay payments, PDF e-vouchers, and daily tools for the ops team.",
+    stack: ["Next.js 16", ".NET 10", "EF Core", "PostgreSQL", "Redis", "Hangfire", "Omise", "pnpm monorepo", "Docker", "Jenkins", "GitHub Actions"],
     status: "In progress",
   },
   {

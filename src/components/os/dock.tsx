@@ -60,8 +60,10 @@ export function Dock({ isMobile }: { isMobile: boolean }) {
   const shown = isMobile ? apps.filter((a) => ["about", "projects", "terminal", "mail"].includes(a.id)) : apps;
   const size = isMobile ? 54 : BASE;
 
+  // Sits above the icon at full magnification (it grows upwards by MAX_BOOST × size), plus a gap.
+  const tipStyle = { bottom: `calc(100% + ${Math.round(MAX_BOOST * size) + 6}px)` };
   const tooltip =
-    "pointer-events-none absolute -top-10 rounded-lg border border-white/20 bg-zinc-900/75 px-2.5 py-1 text-xs whitespace-nowrap text-white opacity-0 shadow-lg backdrop-blur-md transition-all duration-150 group-hover:-translate-y-1 group-hover:opacity-100";
+    "pointer-events-none absolute z-20 rounded-lg border border-white/20 bg-zinc-900/75 px-2.5 py-1 text-xs whitespace-nowrap text-white opacity-0 shadow-lg backdrop-blur-md transition-all duration-150 group-hover:-translate-y-1 group-hover:opacity-100";
 
   return (
     <nav
@@ -86,7 +88,7 @@ export function Dock({ isMobile }: { isMobile: boolean }) {
             aria-label={`Open ${a.title}`}
             className="group relative flex flex-col items-center"
           >
-            {!isMobile ? <span className={tooltip}>{a.title.split(" — ")[0]}</span> : null}
+            {!isMobile ? <span className={tooltip} style={tipStyle}>{a.title.split(" — ")[0]}</span> : null}
             <span className={`block ${bouncing === a.id ? "os-dock-bounce" : ""}`}>
               <span
                 ref={(el) => {
@@ -123,7 +125,7 @@ export function Dock({ isMobile }: { isMobile: boolean }) {
                 aria-label={`${l.title} (opens in a new tab)`}
                 className="group relative flex flex-col items-center"
               >
-                <span className={tooltip}>{l.title} ↗</span>
+                <span className={tooltip} style={tipStyle}>{l.title} ↗</span>
                 <span
                   ref={(el) => {
                     zooms.current[l.id] = el;

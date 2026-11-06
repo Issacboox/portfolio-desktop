@@ -3,7 +3,7 @@
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 import { askSuggestions, profile } from "@/content/profile";
 import cutout from "../../../public/images/nurarat-cutout.webp";
 import { fmt, useNow } from "./hooks";
@@ -42,14 +42,24 @@ function AvailabilityPill() {
 /** Hero card: the 3D avatar (desktop) or photo (phone), name and quick actions. */
 export function ProfileWidget({ use3D, delay }: { use3D: boolean; delay?: number }) {
   const os = useOS();
+  // Start three.js only once the browser is idle after the unlock animation, so that animation stays smooth.
+  const [ready3D, setReady3D] = useState(false);
+  useEffect(() => {
+    if (!use3D) return;
+    const w = window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number };
+    const t = setTimeout(() => (w.requestIdleCallback ? w.requestIdleCallback(() => setReady3D(true), { timeout: 2000 }) : setReady3D(true)), 900);
+    return () => clearTimeout(t);
+  }, [use3D]);
   return (
     <Glass className="w-full" delay={delay}>
       <div className="relative h-48 overflow-hidden bg-gradient-to-br from-orange-300/70 via-rose-300/60 to-violet-300/60 dark:from-orange-500/30 dark:via-rose-500/25 dark:to-violet-600/30">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.55),transparent_60%)]" />
-        {use3D ? (
-          <div className="absolute inset-0">
+        {use3D && ready3D ? (
+          <div className="absolute inset-0 animate-in fade-in duration-700">
             <AvatarScene distance={3.3} />
           </div>
+        ) : use3D ? (
+          <div className="absolute inset-0 animate-pulse bg-white/10" />
         ) : (
           <Image src={cutout} alt={profile.name} fill priority sizes="320px" className="object-contain object-bottom" />
         )}

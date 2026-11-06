@@ -9,7 +9,7 @@
 <style>
   @page { size: A4; margin: 0; }
   * { box-sizing: border-box; }
-  body { margin: 0; font-family: Roboto, "Segoe UI", Arial, sans-serif; color: #333; font-size: 8.6pt; line-height: 1.27; }
+  body { margin: 0; font-family: Roboto, "Segoe UI", Arial, sans-serif; color: #333; font-size: 8.6pt; line-height: 1.25; }
   .page { width: 210mm; padding: 7mm 9mm 4mm; position: relative; }
   .corner { position: absolute; left: 9mm; top: 7mm; width: 20mm; height: 20mm; border-left: 2px solid #222; border-top: 2px solid #222; }
   header { text-align: right; padding: 3mm 0 0; }
@@ -21,7 +21,7 @@
   .bar a { color: #fff; text-decoration: none; white-space: nowrap; }
   .sep { font-size: 0; }
   .bar span { white-space: nowrap; }
-  h2 { font-size: 10.5pt; font-weight: 700; color: #666; margin: 3.6mm 0 1.6mm; display: flex; align-items: center; gap: 4mm; }
+  h2 { font-size: 10.5pt; font-weight: 700; color: #666; margin: 3mm 0 1.4mm; display: flex; align-items: center; gap: 4mm; }
   h2::after { content: ""; flex: 1; height: 1px; background: #333; }
   h2.plain::after { display: none; }
   .summary { text-align: justify; margin: 0 2mm; }
@@ -111,10 +111,11 @@
 
       <h2>PROJECTS</h2>
       <div class="projects">
-        <div class="proj"><b>NurOS</b> <span class="muted">(<a href="https://portfolio.gogomaru.com">portfolio.gogomaru.com</a>)</span>: desktop-style portfolio with an AI assistant that answers from my own documents with citations (RAG). Next.js 16, TypeScript, Three.js.</div>
-        <div class="proj"><b>Maru Desk</b> <span class="muted">(live, <a href="https://marudesk.gogomaru.com">marudesk.gogomaru.com</a>)</span>: quotes, invoices, receipts and PromptPay QR payments for small Thai businesses. Next.js, React.</div>
+        <div class="proj"><b>NurOS</b> <span class="muted">(<a href="https://portfolio.gogomaru.com">portfolio.gogomaru.com</a>)</span>: desktop-style portfolio with a RAG AI assistant that cites its sources. Next.js 16, TypeScript.</div>
+        <div class="proj"><b>Maru Desk</b> <span class="muted">(live, <a href="https://marudesk.gogomaru.com">marudesk.gogomaru.com</a>)</span>: invoices and PromptPay QR payments for small Thai businesses. Next.js, PostgreSQL, Docker, Jenkins.</div>
+        <div class="proj"><b>Discord team assistant bot</b> <span class="muted">(live)</span>: Claude Q&amp;A, Jira/Azure DevOps, Jenkins alerts, Google Drive sync, React admin. Node.js, Docker.</div>
         <div class="proj"><b>Private LLM platform</b> <span class="muted">(building)</span>: self-hosted AI assistant with Ollama/vLLM, RAG on pgvector, evals, OCR and audit log. Next.js, Docker, Python.</div>
-        <div class="proj"><b>JoybiniTour, MARU travel booking</b> <span class="muted">(in progress)</span>: travel booking sites and back office with partner (B2B) approval. Next.js, .NET.</div>
+        <div class="proj"><b>JoybiniTour</b> <span class="muted">(in progress)</span>: tour booking site, back office and .NET 10 API with Redis seat holds and Omise payments.</div>
       </div>
     </main>
 

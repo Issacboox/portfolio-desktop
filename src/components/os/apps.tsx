@@ -22,7 +22,7 @@ export type AppDef = {
 
 export const apps: AppDef[] = [
   { id: "about", title: "About Me", icon: UserRound, from: "#ff8a65", to: "#f4511e", size: { w: 860, h: 580 }, component: AboutApp, keywords: "about bio experience skills work timeline how i work" },
-  { id: "projects", title: "Projects", icon: FolderOpen, from: "#6cb8ff", to: "#2f7bf6", size: { w: 880, h: 560 }, component: ProjectsApp, keywords: "projects portfolio work apps finder" },
+  { id: "projects", title: "Projects", icon: FolderOpen, from: "#6cb8ff", to: "#2f7bf6", size: { w: 1000, h: 660 }, component: ProjectsApp, keywords: "projects portfolio work apps finder" },
   { id: "terminal", title: "Terminal — Ask my AI", icon: SquareTerminal, from: "#3f3f46", to: "#09090b", size: { w: 760, h: 480 }, component: TerminalApp, keywords: "terminal ai chat ask question shell" },
   { id: "blog", title: "Blog", icon: Compass, from: "#7dd3fc", to: "#0284c7", size: { w: 1000, h: 660 }, component: BlogApp, keywords: "blog posts writing notes articles knowledge claude ai tokens dotnet seo pwa cicd" },
   { id: "mail", title: "Contact", icon: Mail, from: "#5eead4", to: "#0d9488", size: { w: 640, h: 520 }, component: MailApp, keywords: "contact email mail hire message" },

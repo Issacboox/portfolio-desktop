@@ -60,7 +60,7 @@ def smooth(obj):
     for p in obj.data.polygons:
         p.use_smooth = True
 
-def sphere(name, loc, scale, material, segs=48, rings=24, parent=None):
+def sphere(name, loc, scale, material, segs=32, rings=16, parent=None):
     bpy.ops.mesh.primitive_uv_sphere_add(segments=segs, ring_count=rings, radius=1, location=loc)
     o = bpy.context.active_object
     o.name = name
@@ -134,7 +134,7 @@ cap = sphere("HairCap", HC + Vector((0, 0.015, 0.02)), (0.5, 0.475, 0.52), HAIR,
 bisect(cap, HC + Vector((0, 0, 0.12)), (0, 0.55, 1), keep="above")
 # bangs: a band across the forehead, cut with a slightly wavy fringe
 solidify(cap, 0.015)
-bangs = sphere("Bangs", HC + Vector((0, -0.01, 0.03)), (0.497, 0.468, 0.512), HAIR, 64, 32, parent=head)
+bangs = sphere("Bangs", HC + Vector((0, -0.01, 0.03)), (0.497, 0.468, 0.512), HAIR, 48, 24, parent=head)
 bisect(bangs, HC + Vector((0, 0, 0.19)), (0, -0.15, 1), keep="above")
 solidify(bangs, 0.02)
 solidify(back, 0.02)
