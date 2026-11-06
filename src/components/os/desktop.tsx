@@ -131,8 +131,12 @@ function Shell() {
     if (!openedOnce.current) {
       openedOnce.current = true;
       setWelcomed(true);
+      // Installed-app shortcuts (manifest) link to /?app=<id>; open that app straight away.
+      const wanted = new URLSearchParams(window.location.search).get("app");
+      const shortcut = apps.find((x) => x.id === wanted);
+      if (shortcut) os.open(shortcut.id);
       // Phones land on the home screen; desktops open the About window next to the widgets.
-      if (!window.matchMedia("(max-width: 767px)").matches) os.open("about");
+      else if (!window.matchMedia("(max-width: 767px)").matches) os.open("about");
     }
   }, [os]);
 
