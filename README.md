@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio — Nurarat Sangreuang
 
-## Getting Started
+AI-powered portfolio and blog. Full-stack Next.js (App Router) + Supabase (Postgres, pgvector, Auth).
 
-First, run the development server:
+## Stack
+
+- **Next.js 16** (App Router, TypeScript, Tailwind CSS v4, shadcn/ui)
+- **Supabase** — Postgres + pgvector for RAG, Auth for the admin area, project `portfolio` (London)
+- **Claude API** for the AI features (later phases), **Voyage AI** for embeddings
+
+## Getting started
 
 ```bash
+npm install
+cp .env.example .env.local   # fill in values from the Supabase dashboard
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 — `GET /api/v1/health` checks the database connection.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Database
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Migrations live in `supabase/migrations`.
 
-## Learn More
+| Script | Does |
+| --- | --- |
+| `npm run db:new <name>` | Create a new migration file |
+| `npm run db:push` | Apply migrations to the remote Supabase project (needs `SUPABASE_DB_PASSWORD`) |
+| `npm run db:types` | Regenerate `src/lib/supabase/database.types.ts` |
 
-To learn more about Next.js, take a look at the following resources:
+To make yourself admin: sign up once, then in the SQL editor run
+`insert into public.admins (user_id) select id from auth.users where email = 'you@example.com';`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+  app/            routes (pages + /api/v1 Route Handlers)
+  components/ui/  shadcn/ui components
+  lib/supabase/   client.ts (browser) · server.ts (RSC/handlers) · admin.ts (secret key) · proxy.ts
+  proxy.ts        refreshes the auth session, guards /admin
+supabase/
+  migrations/     SQL schema: content, knowledge_chunks (vector 1024), chat logs, fit reports
+```
