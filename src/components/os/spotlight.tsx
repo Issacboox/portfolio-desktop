@@ -102,7 +102,7 @@ export function Spotlight() {
                     className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left ${i === index ? "bg-blue-600 text-white" : ""}`}
                   >
                     {r.group === "Applications" ? (
-                      <AppIcon icon={app.icon} from={app.from} to={app.to} size={28} />
+                      <AppIcon art={app.id} icon={app.icon} from={app.from} to={app.to} size={28} />
                     ) : (
                       <FileText className={`size-5 ${i === index ? "text-white" : "text-zinc-400"}`} />
                     )}

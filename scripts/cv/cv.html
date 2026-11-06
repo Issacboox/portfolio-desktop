@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Nurarat Sangreuang — CV</title>
+<!-- Source for public/cv/Nurarat_Sangreuang_CV.pdf. Rebuild with: node scripts/cv/build-cv.mjs -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Roboto, "Segoe UI", Arial, sans-serif; color: #333; font-size: 8.6pt; line-height: 1.27; }
+  .page { width: 210mm; padding: 7mm 9mm 4mm; position: relative; }
+  .corner { position: absolute; left: 9mm; top: 7mm; width: 20mm; height: 20mm; border-left: 2px solid #222; border-top: 2px solid #222; }
+  header { text-align: right; padding: 3mm 0 0; }
+  h1 { margin: 0; font-size: 25pt; font-weight: 300; letter-spacing: 2.5px; color: #555; }
+  h1 b { font-weight: 700; color: #4a4a4a; }
+  .rule { width: 30mm; height: 2px; background: #222; margin: 2mm 0 1.5mm auto; }
+  .role { font-size: 12.5pt; font-weight: 300; color: #444; }
+  .bar { margin-top: 3.5mm; background: #6b6b6b; color: #fff; padding: 2.8mm 4mm; display: flex; justify-content: space-between; gap: 2mm; font-size: 8.3pt; }
+  .bar a { color: #fff; text-decoration: none; white-space: nowrap; }
+  .sep { font-size: 0; }
+  .bar span { white-space: nowrap; }
+  h2 { font-size: 10.5pt; font-weight: 700; color: #666; margin: 3.6mm 0 1.6mm; display: flex; align-items: center; gap: 4mm; }
+  h2::after { content: ""; flex: 1; height: 1px; background: #333; }
+  h2.plain::after { display: none; }
+  .summary { text-align: justify; margin: 0 2mm; }
+  .cols { display: grid; grid-template-columns: 1fr 70mm; gap: 9mm; }
+  .proj, .job { break-inside: avoid; }
+  .job { border-left: 1px solid #555; padding-left: 5mm; margin-left: 1mm; position: relative; padding-bottom: 2.2mm; }
+  .job::before { content: ""; position: absolute; left: -2.2mm; top: 1mm; width: 3.2mm; height: 3.2mm; background: #555; }
+  .when { font-weight: 700; font-size: 10.5pt; }
+  .org { font-size: 11pt; color: #444; }
+  .title { font-weight: 700; font-size: 10.5pt; margin-top: 0.5mm; }
+  ul { margin: 1.5mm 0 0; padding-left: 4.5mm; }
+  li { margin: 0.35mm 0; }
+  .side h2 { margin-top: 3mm; }
+  .side h2::after { display: none; }
+  .side ul { margin-top: 0; }
+  .muted { color: #666; }
+  .projects { display: grid; gap: 1.6mm; margin: 0 1mm; }
+  .proj { margin: 0; }
+  .proj a { color: #333; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="corner"></div>
+  <header>
+    <h1>NURARAT &nbsp;<b>SANGREUANG</b></h1>
+    <div class="rule"></div>
+    <div class="role">Software Developer</div>
+  </header>
+
+  <div class="bar">
+    <span>Bangkok, Thailand</span>
+    <span class="sep"> | </span><a href="mailto:nurarat0024@gmail.com">nurarat0024@gmail.com</a><span class="sep"> | </span>
+    <a href="https://github.com/Issacboox">github.com/Issacboox</a><span class="sep"> | </span>
+    <a href="https://www.linkedin.com/in/nurarat-sangreuang-b62839298">LinkedIn: Nurarat Sangreuang</a><span class="sep"> | </span>
+    <a href="https://portfolio.gogomaru.com">portfolio.gogomaru.com</a>
+  </div>
+
+  <h2>PROFILE INFO</h2>
+  <p class="summary">
+    Backend Developer with over 2 years of experience developing backend services and enterprise integrations. Strong in API
+    development, database design, and performance optimization, with hands-on experience in OpenShift, Docker, and CI/CD pipelines.
+    Experienced in integrating Oracle WebCenter Content (WCC) and K2 workflows to support enterprise document and AI data pipelines.
+    Fast learner who adapts quickly to new technologies and enjoys sharing knowledge with teammates. Interested in full-stack
+    development, with backend engineering as my core strength.
+  </p>
+
+  <div class="cols">
+    <main>
+      <h2>EXPERIENCE</h2>
+      <div class="job">
+        <div class="when">Jul 2026 - PRESENT</div>
+        <div class="org">BusOnlineTicket</div>
+        <div class="title">Software Developer (full stack, fully remote)</div>
+        <ul>
+          <li>Implement new features end to end, across backend APIs and frontend</li>
+          <li>Integrate new vendors (operators) to pull in their data, and build tools to manage trips and routes</li>
+          <li>Built a LINE chatbot and integrated a payment gateway</li>
+          <li>Integrated Facebook and Google, including pulling customer reviews from Google</li>
+          <li>Work directly with vendors on requirements, data formats and go-live</li>
+        </ul>
+      </div>
+      <div class="job">
+        <div class="when">Aug 2024 - Jul 2026</div>
+        <div class="org">Sirisoft Public Company Limited</div>
+        <div class="title">Software Development</div>
+        <ul>
+          <li>Designed and developed backend APIs for business systems including e-Quotation, e-Commerce, and Car Sales platforms using .NET</li>
+          <li>Experienced in deploying applications on OpenShift and working with Docker. Familiar with supporting CI/CD processes using Tekton pipelines.</li>
+          <li>Optimized database queries and API response handling to improve backend performance and system reliability</li>
+          <li>Integrated enterprise systems including Oracle WebCenter Content (WCC) and K2 workflows for document</li>
+          <li>Contributed to API specification design for AI data ingestion workflows, ensuring structured and reliable data flow</li>
+          <li>Applied SonarQube for code quality and participated in code reviews</li>
+          <li>Collaborated in an Agile Scrum environment using Jira</li>
+        </ul>
+      </div>
+      <div class="job">
+        <div class="when">Apr 2023 - Jun 2023</div>
+        <div class="org">Toyota Material Handling Warehouse Solution (Thailand)</div>
+        <div class="title">Software Engineer Intern</div>
+        <ul>
+          <li>Ticketing System: built a website for reporting issues and tracking status and resolutions, with in-app messaging.</li>
+          <li>API Documentation: wrote web-based API guides for developers, aligned with company standards.</li>
+          <li>Server Room: regular checks for performance, security and environmental issues.</li>
+        </ul>
+      </div>
+
+      <h2>PROJECTS</h2>
+      <div class="projects">
+        <div class="proj"><b>NurOS</b> <span class="muted">(<a href="https://portfolio.gogomaru.com">portfolio.gogomaru.com</a>)</span>: desktop-style portfolio with an AI assistant that answers from my own documents with citations (RAG). Next.js 16, TypeScript, Three.js.</div>
+        <div class="proj"><b>Maru Desk</b> <span class="muted">(live, <a href="https://marudesk.gogomaru.com">marudesk.gogomaru.com</a>)</span>: quotes, invoices, receipts and PromptPay QR payments for small Thai businesses. Next.js, React.</div>
+        <div class="proj"><b>Private LLM platform</b> <span class="muted">(building)</span>: self-hosted AI assistant with Ollama/vLLM, RAG on pgvector, evals, OCR and audit log. Next.js, Docker, Python.</div>
+        <div class="proj"><b>JoybiniTour, MARU travel booking</b> <span class="muted">(in progress)</span>: travel booking sites and back office with partner (B2B) approval. Next.js, .NET.</div>
+      </div>
+    </main>
+
+    <aside class="side">
+      <h2 class="plain">EDUCATION</h2>
+      <div>2020 - 2024 | Burapha University</div>
+      <div><b>Information Technology (IT)</b></div>
+      <div class="muted">GPA 3.13</div>
+
+      <h2>PROGRAMMING LANGUAGES</h2>
+      <ul><li>C#, JavaScript, TypeScript</li><li>HTML, CSS</li><li>Basic understanding of Java</li></ul>
+      <h2>BACKEND</h2>
+      <ul><li>.NET (Version 4.6, 8, 10)</li><li>NodeJs</li></ul>
+      <h2>DATABASE</h2>
+      <ul><li>SQL (Microsoft SQL Server, PostgreSQL, Oracle)</li><li>Database Design</li><li>Query Optimization</li></ul>
+      <h2>DEVOPS &amp; PLATFORM</h2>
+      <ul><li>Docker, OpenShift</li><li>Tekton Pipeline, CI/CD</li><li>AWS S3, MinIO</li></ul>
+      <h2>FRONTEND</h2>
+      <ul><li>React, TypeScript, Next.js (basic)</li></ul>
+      <h2>TESTING &amp; QUALITY</h2>
+      <ul><li>xUnit, SonarQube, Code Review, Robot Framework (basic)</li></ul>
+      <h2>TOOLS</h2>
+      <ul><li>Git, Jira, RabbitMQ</li></ul>
+      <h2>LANGUAGES</h2>
+      <ul>
+        <li>English (Intermediate)</li>
+        <li>Thai (Native)</li>
+      </ul>
+
+      <h2>CERTIFICATE</h2>
+      <ul>
+        <li><b>Information Technology Professionals Examination (ITPE)</b>: Information Technology Passport Examination (IP)</li>
+      </ul>
+
+    </aside>
+  </div>
+
+</div>
+</body>
+</html>

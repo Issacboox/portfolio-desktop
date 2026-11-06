@@ -186,13 +186,13 @@ function Shell() {
           <div className="mt-6 grid grid-cols-4 gap-x-3 gap-y-5">
             {apps.map((a, i) => (
               <button key={a.id} onClick={() => os.open(a.id)} className="os-widget-in flex flex-col items-center gap-1.5 transition active:scale-90" style={{ animationDelay: `${120 + i * 35}ms` }}>
-                <AppIcon icon={a.icon} from={a.from} to={a.to} size={58} />
+                <AppIcon art={a.id} icon={a.icon} from={a.from} to={a.to} size={58} />
                 <span className={`text-[11px] ${label}`}>{a.title.split(" — ")[0]}</span>
               </button>
             ))}
             {externalLinks.map((l, i) => (
               <a key={l.id} href={l.href} target="_blank" rel="noreferrer" className="os-widget-in flex flex-col items-center gap-1.5 transition active:scale-90" style={{ animationDelay: `${330 + i * 35}ms` }}>
-                <AppIcon icon={l.icon} from={l.from} to={l.to} size={58} />
+                <AppIcon art={l.id} icon={l.icon} from={l.from} to={l.to} size={58} />
                 <span className={`text-[11px] ${label}`}>{l.title}</span>
               </a>
             ))}
@@ -232,7 +232,7 @@ function Shell() {
               return (
                 <button key={id} onClick={() => os.open(id)} className="group flex w-20 flex-col items-center gap-1 rounded-xl p-1.5 transition hover:bg-white/20 active:scale-95">
                   <span className="transition-transform group-hover:-translate-y-0.5">
-                    <AppIcon icon={a.icon} from={a.from} to={a.to} size={52} />
+                    <AppIcon art={a.id} icon={a.icon} from={a.from} to={a.to} size={52} />
                   </span>
                   <span className={`text-xs ${label}`}>{a.title.split(" — ")[0]}</span>
                 </button>

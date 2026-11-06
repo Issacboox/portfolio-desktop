@@ -23,19 +23,54 @@ function timeIn(tz: string) {
   return new Intl.DateTimeFormat("en-GB", { timeZone: tz, hour: "2-digit", minute: "2-digit", weekday: "short" }).format(new Date());
 }
 
-/**
- * The AI answer. Phase 3 wires this to POST /api/v1/chat (RAG over my profile, projects and posts).
- * Until then it replies honestly instead of making things up.
- */
-async function askAI(question: string): Promise<ReactNode> {
-  void question;
-  await new Promise((r) => setTimeout(r, 650));
+type Turn = { role: "user" | "assistant"; content: string };
+type Source = { n: number; source: string; section?: string; excerpt: string };
+
+/** Asks POST /api/v1/chat: answers grounded in my profile, projects, blog and docs, with sources. */
+async function askAI(question: string, history: Turn[]): Promise<{ node: ReactNode; answer?: string }> {
+  try {
+    const res = await fetch("/api/v1/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ question, history }),
+    });
+    const data = (await res.json()) as { answer?: string; sources?: Source[]; error?: string };
+    if (!res.ok || !data.answer) {
+      return { node: <span className="text-amber-400">{data.error ?? "The AI couldn't answer right now."}</span> };
+    }
+    return { node: <AiAnswer answer={data.answer} sources={data.sources ?? []} />, answer: data.answer };
+  } catch {
+    return { node: <span className="text-amber-400">Couldn&apos;t reach the AI. Check your connection and try again.</span> };
+  }
+}
+
+function AiAnswer({ answer, sources }: { answer: string; sources: Source[] }) {
+  // Turn [1] markers into small highlighted chips.
+  const parts = answer.split(/([d+])/g);
   return (
-    <span>
-      <Hl>ai</Hl> I&apos;m still being trained on Nurarat&apos;s work, so I can&apos;t answer free-form questions yet.
-      Try <Hl>about</Hl>, <Hl>experience</Hl>, <Hl>projects</Hl> or <Hl>help</Hl> — or email{" "}
-      <a className="underline" href={`mailto:${profile.email}`}>{profile.email}</a>.
-    </span>
+    <div>
+      <div>
+        <Hl>ai</Hl>{" "}
+        {parts.map((p, i) =>
+          /^[d+]$/.test(p) ? (
+            <sup key={i} className="mx-0.5 rounded bg-orange-400/20 px-1 text-[10px] text-orange-300">
+              {p.slice(1, -1)}
+            </sup>
+          ) : (
+            <span key={i}>{p}</span>
+          ),
+        )}
+      </div>
+      {sources.length ? (
+        <div className="mt-1.5 space-y-0.5 border-l border-zinc-700 pl-3 text-[12px]">
+          {sources.map((s) => (
+            <div key={s.n} title={s.excerpt}>
+              <span className="text-orange-300">[{s.n}]</span> <Dim>{s.source}{s.section ? ` › ${s.section}` : ""}</Dim>
+            </div>
+          ))}
+        </div>
+      ) : null}
+    </div>
   );
 }
 
@@ -50,6 +85,7 @@ export function TerminalApp({ props }: { props?: Record<string, string> }) {
   const endRef = useRef<HTMLDivElement>(null);
   const nextId = useRef(1);
   const askedFromWidget = useRef(false);
+  const convo = useRef<Turn[]>([]);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ block: "end" });
@@ -70,6 +106,7 @@ export function TerminalApp({ props }: { props?: Record<string, string> }) {
       case "help":
         return push(line, <Help />);
       case "clear":
+        convo.current = [];
         return setEntries([]);
       case "whoami":
         return push(line, <span>{profile.name} — {profile.role}, {profile.location}. <Hl>{profile.availability}.</Hl></span>);
@@ -95,7 +132,7 @@ export function TerminalApp({ props }: { props?: Record<string, string> }) {
         return push(
           line,
           cmd === "ls" ? (
-            <span className="text-sky-400">about.txt  projects/  blog/  contact.txt  resume.pdf</span>
+            <span className="text-sky-400">about.txt  projects/  blog/  contact.txt  <a className="underline" href={profile.cv} download>resume.pdf</a></span>
           ) : (
             <div>{projects.map((p) => <div key={p.slug}><Hl>{p.title}</Hl> <Dim>[{p.status}]</Dim></div>)}</div>
           ),
@@ -147,9 +184,10 @@ export function TerminalApp({ props }: { props?: Record<string, string> }) {
     // Anything else is a question for the AI.
     const question = cmd.toLowerCase() === "ask" ? arg : line;
     setBusy(true);
-    const answer = await askAI(question);
+    const { node, answer } = await askAI(question, convo.current);
+    if (answer) convo.current = [...convo.current, { role: "user" as const, content: question }, { role: "assistant" as const, content: answer }].slice(-6);
     setBusy(false);
-    push(line, answer);
+    push(line, node);
   }
 
   // A question handed over from the desktop "Ask my AI" widget runs straight away.
@@ -196,7 +234,7 @@ export function TerminalApp({ props }: { props?: Record<string, string> }) {
           {e.output ? <div className="whitespace-pre-wrap">{e.output}</div> : null}
         </div>
       ))}
-      {busy ? <div className="text-zinc-500"><span className="animate-pulse">ai is thinking…</span></div> : null}
+      {busy ? <div className="text-zinc-500"><span className="animate-pulse">ai is reading the docs…</span></div> : null}
       <div className="flex items-center gap-2">
         <span className="shrink-0 text-emerald-400">{PROMPT}</span>
         <input

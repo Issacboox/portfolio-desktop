@@ -77,6 +77,8 @@ function Index({ onOpen }: { onOpen: (slug: string) => void }) {
         ))}
       </div>
 
+      {plannedPosts.length ? (
+        <>
       <h2 className="mt-12 text-sm font-semibold text-zinc-500">On my writing list</h2>
       <ul className="mt-2 divide-y divide-black/5 dark:divide-white/10">
         {plannedPosts.map((p) => (
@@ -89,6 +91,8 @@ function Index({ onOpen }: { onOpen: (slug: string) => void }) {
           </li>
         ))}
       </ul>
+        </>
+      ) : null}
     </div>
   );
 }

@@ -36,7 +36,7 @@ export function WelcomeNotification() {
           }}
           className="flex min-w-0 flex-1 items-start gap-3 text-left"
         >
-          <AppIcon icon={app.icon} from={app.from} to={app.to} size={36} />
+          <AppIcon art={app.id} icon={app.icon} from={app.from} to={app.to} size={36} />
           <span className="min-w-0 flex-1">
             <span className="flex items-center justify-between text-[11px] opacity-60">
               <span>TERMINAL</span>

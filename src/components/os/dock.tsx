@@ -94,7 +94,7 @@ export function Dock({ isMobile }: { isMobile: boolean }) {
                 }}
                 className="block origin-bottom transition-[transform,margin] duration-150 ease-out"
               >
-                <AppIcon icon={a.icon} from={a.from} to={a.to} size={size} />
+                <AppIcon art={a.id} icon={a.icon} from={a.from} to={a.to} size={size} />
               </span>
             </span>
             {!isMobile ? (
@@ -130,7 +130,7 @@ export function Dock({ isMobile }: { isMobile: boolean }) {
                   }}
                   className="block origin-bottom transition-[transform,margin] duration-150 ease-out"
                 >
-                  <AppIcon icon={l.icon} from={l.from} to={l.to} size={size} />
+                  <AppIcon art={l.id} icon={l.icon} from={l.from} to={l.to} size={size} />
                 </span>
                 <span className="mt-1 size-1" />
               </a>

@@ -14,6 +14,10 @@ export const profile = {
   github: "https://github.com/Issacboox",
   email: "nurarat0024@gmail.com",
   linkedin: "https://www.linkedin.com/in/nurarat-sangreuang-b62839298",
+  /** Path to the CV PDF in /public. Leave empty to hide the Download CV button. */
+  cv: "/cv/Nurarat_Sangreuang_CV.pdf" as string,
+  /** Path to the cover letter PDF in /public. Leave empty to hide its button. */
+  coverLetter: "/cv/Nurarat_Sangreuang_Cover_Letter.pdf" as string,
 };
 
 export const stack = [
@@ -79,7 +83,14 @@ export const timeline: TimelineItem[] = [
     period: "Jul 2026 — now",
     title: "Software Developer",
     org: "BusOnlineTicket",
-    body: "Full-time, fully remote. Building features across the stack.",
+    body: "Full-time, fully remote. Working across both backend and frontend.",
+    points: [
+      "Implement new features end to end, across backend APIs and frontend.",
+      "Integrate new vendors (operators) to pull in their data, and build tools to manage trips and routes.",
+      "Built a LINE chatbot for customers and integrated a payment gateway.",
+      "Integrated Facebook and Google, including pulling customer reviews from Google.",
+      "Work directly with vendors on requirements, data formats and go-live.",
+    ],
     current: true,
   },
   {
@@ -160,7 +171,7 @@ export const skillGroups: SkillGroup[] = [
   { title: "DevOps & platform", items: ["Docker", "OpenShift", "Tekton CI/CD", "AWS S3", "MinIO", "Git"] },
   { title: "Analysis & design", items: ["UX/UI design", "Business analysis (BA)", "System analysis (SA)", "API specification"] },
   { title: "Quality", items: ["xUnit", "SonarQube", "Code review", "Robot Framework (basic)"] },
-  { title: "Integrations & AI", items: ["Oracle WebCenter Content", "K2 workflows", "Claude API", "RAG", "Ollama / local LLMs", "vLLM", "pgvector", "LLM evals"] },
+  { title: "Integrations & AI", items: ["LINE chatbot", "Payment gateway", "Facebook & Google APIs", "Oracle WebCenter Content", "K2 workflows", "Claude API", "RAG", "Ollama / local LLMs", "vLLM", "pgvector", "LLM evals"] },
   { title: "Just for fun", items: ["Roblox games (Luau)", "Blender 3D"] },
 ];
 
@@ -248,9 +259,5 @@ export const projects: Project[] = [
   },
 ];
 
-export const plannedPosts = [
-  { title: "How I built an AI that answers recruiters' questions about me", tag: "AI · RAG" },
-  { title: "From C# backend to full-stack: what changed for me", tag: "Career" },
-  { title: "Modelling a 3D avatar of myself with a Blender Python script", tag: "3D · Blender" },
-  { title: "Building a desktop OS in the browser with React", tag: "Frontend" },
-];
+/** Posts I plan to write, shown as "Coming soon" in the Blog. */
+export const plannedPosts: { title: string; tag: string }[] = [];

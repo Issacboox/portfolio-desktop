@@ -2,6 +2,8 @@
 // headings feed the table of contents, code gets a copy button, flows become diagrams.
 // Later these move into the Supabase `posts` table and feed the AI chat.
 
+import { morePosts } from "./posts-more";
+
 export type Block =
   | { type: "p"; text: string }
   | { type: "h2"; text: string }
@@ -23,7 +25,7 @@ export type Post = {
   blocks: Block[];
 };
 
-export const posts: Post[] = [
+const basePosts: Post[] = [
   {
     slug: "how-claude-works",
     title: "How Claude actually works: tokens, context and the harness",
@@ -581,5 +583,7 @@ jobs:
     ],
   },
 ];
+
+export const posts: Post[] = [...morePosts, ...basePosts];
 
 export const postBySlug = (slug: string) => posts.find((p) => p.slug === slug);

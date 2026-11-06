@@ -1,6 +1,6 @@
 "use client";
 
-import { Briefcase, Clock3, Layers, Plane, Sparkles } from "lucide-react";
+import { Briefcase, Clock3, Download, FileText, Layers, Plane, Sparkles } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import { focusAreas, languages, process, profile, skillGroups, timeline, workingStyle } from "@/content/profile";
@@ -71,6 +71,24 @@ function About() {
           <span className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-xs font-medium text-emerald-700 dark:text-emerald-400">
             <span className="size-1.5 rounded-full bg-emerald-500" /> {profile.availability}
           </span>
+          {profile.cv ? (
+            <a
+              href={profile.cv}
+              download
+              className="mt-2 ml-2 inline-flex items-center gap-1.5 rounded-full bg-zinc-900 px-3 py-1 text-xs font-semibold text-white shadow-sm transition hover:bg-zinc-700 active:scale-95 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200"
+            >
+              <Download className="size-3.5" /> Download CV
+            </a>
+          ) : null}
+          {profile.coverLetter ? (
+            <a
+              href={profile.coverLetter}
+              download
+              className="mt-2 ml-2 inline-flex items-center gap-1.5 rounded-full border border-black/10 bg-white/80 px-3 py-1 text-xs font-semibold text-zinc-800 shadow-sm transition hover:bg-white active:scale-95 dark:border-white/15 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
+            >
+              <FileText className="size-3.5" /> Cover letter
+            </a>
+          ) : null}
         </div>
       </div>
       <p className="text-[15px] leading-relaxed text-zinc-700 dark:text-zinc-300">
